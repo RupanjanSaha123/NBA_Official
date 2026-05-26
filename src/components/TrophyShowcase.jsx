@@ -33,7 +33,7 @@ export default function TrophyShowcase() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary-container/5 to-surface-container-lowest pointer-events-none z-0" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] rounded-full bg-gradient-to-tr from-secondary/5 to-transparent blur-3xl opacity-50 pointer-events-none z-0" />
 
-      <div className="max-w-[1440px] mx-auto px-6 md:px-16 relative z-10">
+      <div className="w-full px-6 md:px-16 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
           
           {/* Narrative Content (Left column) */}

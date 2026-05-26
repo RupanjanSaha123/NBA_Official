@@ -168,7 +168,7 @@ export default function LegacySection() {
   };
 
   return (
-    <section className="py-20 flex flex-col gap-12 max-w-[1440px] mx-auto px-6 md:px-16">
+    <section className="py-20 flex flex-col gap-12 w-full px-6 md:px-16">
       
       {/* Title & Description */}
       <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 border-b border-white/5 pb-6">
@@ -313,7 +313,7 @@ export default function LegacySection() {
               </div>
 
               {/* Statistics & Bio Column */}
-              <div className="w-full md:w-3/5 p-6 flex flex-col justify-between overflow-y-auto hide-scrollbar h-[350px] md:h-full">
+              <div className="w-full md:w-3/5 p-6 flex flex-col justify-between overflow-y-auto custom-scrollbar h-[350px] md:h-full">
                 
                 {/* Bio Header */}
                 <div>

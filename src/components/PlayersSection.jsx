@@ -76,7 +76,7 @@ export default function PlayersSection() {
   };
 
   return (
-    <section className="py-20 flex flex-col gap-12 max-w-[1440px] mx-auto px-6 md:px-16">
+    <section className="py-20 flex flex-col gap-12 w-full px-6 md:px-16">
       
       {/* Header and Filter Option */}
       <div className="flex flex-col md:flex-row justify-between md:items-end gap-4 border-b border-white/5 pb-6">

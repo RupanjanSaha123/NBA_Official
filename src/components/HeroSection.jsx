@@ -166,7 +166,7 @@ export default function HeroSection({ scrollToSection }) {
         <canvas ref={canvasRef} className="w-full h-full" />
       </div>
 
-      <div className="max-w-[1440px] mx-auto px-6 md:px-16 w-full h-full flex flex-col justify-center relative z-20">
+      <div className="w-full h-full flex flex-col justify-center px-6 md:px-16 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[650px]">
           
           {/* Typography & Call-To-Action (Left column) */}

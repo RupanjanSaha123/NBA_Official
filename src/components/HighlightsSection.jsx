@@ -1,9 +1,18 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Play } from 'lucide-react';
 
 export default function HighlightsSection() {
   const carouselRef = useRef(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const handleCarouselScroll = () => {
+    if (!carouselRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+    const totalScroll = scrollWidth - clientWidth;
+    const progress = totalScroll > 0 ? (scrollLeft / totalScroll) * 100 : 0;
+    setScrollProgress(progress);
+  };
 
   const highlights = [
     {
@@ -75,7 +84,8 @@ export default function HighlightsSection() {
       {/* Horizontal Carousel */}
       <div 
         ref={carouselRef}
-        className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 pr-6 md:pr-16"
+        onScroll={handleCarouselScroll}
+        className="flex gap-6 overflow-x-auto snap-x snap-mandatory custom-scrollbar pb-4 pr-6 md:pr-16"
       >
         {highlights.map((item) => (
           <article 
@@ -117,6 +127,16 @@ export default function HighlightsSection() {
 
           </article>
         ))}
+      </div>
+
+      {/* Scroll Progress Bar */}
+      <div className="flex justify-center mt-6 pr-6 md:pr-16">
+        <div className="w-48 h-[3px] bg-white/10 rounded-full relative overflow-hidden">
+          <div 
+            className="absolute left-0 top-0 h-full bg-primary rounded-full transition-all duration-100 ease-out"
+            style={{ width: `${scrollProgress}%` }}
+          />
+        </div>
       </div>
 
     </section>

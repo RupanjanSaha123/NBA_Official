@@ -14,7 +14,7 @@ export default function TopNavBar({ activeSection, scrollToSection, setSidebarOp
 
   return (
     <nav className="bg-surface/10 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(255,182,147,0.1)] fixed top-0 w-full z-50 transition-all duration-300">
-      <div className="flex justify-between items-center px-4 md:px-16 py-4 max-w-[1440px] mx-auto">
+      <div className="flex justify-between items-center px-4 md:px-16 py-4 w-full">
         
         {/* Hamburger Menu & Brand Logo */}
         <div className="flex items-center gap-3">

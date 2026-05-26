@@ -113,7 +113,7 @@ export default function App() {
         <SideNavBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} activeSection={activeSection} scrollToSection={scrollToSection} />
         
         {/* Main Content scroll window */}
-        <main className="flex-1 flex flex-col relative min-h-screen pt-16">
+        <main className="flex-1 min-w-0 flex flex-col relative min-h-screen pt-16">
           
           {/* Section 1: Hero landing page */}
           <div id="hero" className="scroll-mt-20">
@@ -152,7 +152,7 @@ export default function App() {
 
           {/* Unified Footer */}
           <footer className="w-full py-10 bg-surface-container-lowest border-t border-outline-variant mt-auto">
-            <div className="flex flex-col md:flex-row justify-between items-center px-6 md:px-16 gap-8 max-w-[1440px] mx-auto select-none">
+            <div className="flex flex-col md:flex-row justify-between items-center px-6 md:px-16 gap-8 w-full select-none">
               <div 
                 onClick={() => scrollToSection('hero')}
                 className="font-display-lg text-lg text-on-surface cursor-pointer hover:text-primary transition-colors duration-300 font-bold uppercase tracking-tight"

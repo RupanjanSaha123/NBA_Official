@@ -51,7 +51,7 @@ export default function StatsSection() {
   const bgImgUrl = "https://lh3.googleusercontent.com/aida-public/AB6AXuBMjTpDU-fAz5xfMNFdxt1eoNcjNA_V5MOTkRJQyG8aXEPF8WmfTmTi32fRDf1eKQvvmrMXTW3FwsXnPgtKXIDQwAnX7Mo9Ex2HbhR5OkKKRgyZcvY28v39DdzmnkjNrzeKU5fRyBBmt8oLQRxYy1gW0My_7PvVxhhp2juncJ8PgVXMHtQusK3c0wkEh8B0pAude8H645LQAneBra1PXoHrsaXejg9tZpGuexXSKXX6-eRI8qzDaGbrPCoAZ9tjpvGdwLAQnoxRlEg";
 
   return (
-    <section className="py-20 flex flex-col gap-8 max-w-[1440px] mx-auto px-6 md:px-16">
+    <section className="py-20 flex flex-col gap-8 w-full px-6 md:px-16">
       
       {/* Dynamic Header */}
       <div className="flex items-center justify-between">
@@ -141,19 +141,19 @@ export default function StatsSection() {
         </div>
 
         {/* Scoreboard Bottom Stats Row */}
-        <div className="relative z-10 border-t border-white/5 bg-black/45 backdrop-blur-md px-8 py-3.5 flex justify-between items-center font-label-caps text-[10px] text-on-surface-variant">
-          <div className="flex gap-8">
+        <div className="relative z-10 border-t border-white/5 bg-black/45 backdrop-blur-md px-6 md:px-8 py-3.5 flex overflow-x-auto custom-scrollbar justify-between items-center font-label-caps text-[10px] text-on-surface-variant gap-8">
+          <div className="flex gap-8 flex-shrink-0">
             <span>FG%: <strong className="text-on-surface font-bold">48.5</strong></span>
             <span>3PT%: <strong className="text-on-surface font-bold">35.2</strong></span>
             <span>TIMEOUTS: <strong className="text-secondary font-bold">1</strong></span>
           </div>
           
-          <div className="flex gap-1.5 items-center">
+          <div className="flex gap-1.5 items-center flex-shrink-0">
             <Tv size={12} className="text-primary" />
             <span className="tracking-widest">NETWORK: ABC</span>
           </div>
           
-          <div className="flex gap-8">
+          <div className="flex gap-8 flex-shrink-0">
             <span>FG%: <strong className="text-on-surface font-bold">46.1</strong></span>
             <span>3PT%: <strong className="text-on-surface font-bold">38.9</strong></span>
             <span>TIMEOUTS: <strong className="text-emerald-400 font-bold">2</strong></span>
@@ -347,7 +347,7 @@ export default function StatsSection() {
             
             <h4 className="font-headline-md text-base text-on-surface font-semibold tracking-tight uppercase">Live Commentary</h4>
             
-            <div className="space-y-4 overflow-y-auto max-h-[200px] hide-scrollbar font-body-md text-xs text-on-surface-variant pr-1">
+            <div className="space-y-4 overflow-y-auto max-h-[200px] custom-scrollbar font-body-md text-xs text-on-surface-variant pr-1">
               <div className="border-l border-primary/40 pl-3 py-0.5">
                 <span className="font-label-mono text-[9px] text-primary font-bold">Q4 02:14</span>
                 <p className="mt-0.5 text-on-surface">Lakers call timeout. Play stops as LeBron drives to the basket.</p>
