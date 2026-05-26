@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Courtside Ultra - Highlights &amp; Teams</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wght@600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#ffb693",
+                        "on-primary": "#561f00",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#00373e",
+                        "inverse-primary": "#a04100",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-surface-variant": "#e2bfb0",
+                        "inverse-surface": "#e5e2e1",
+                        "outline-variant": "#5a4136",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary-fixed-dim": "#e9c349",
+                        "background": "#131313",
+                        "secondary-fixed": "#ffe088",
+                        "on-tertiary": "#00363d",
+                        "secondary-container": "#af8d11",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#351000",
+                        "on-secondary": "#3c2f00",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed": "#9cf0ff",
+                        "surface": "#131313",
+                        "surface-bright": "#3a3939",
+                        "surface-container-highest": "#353534",
+                        "error": "#ffb4ab",
+                        "tertiary": "#00daf3",
+                        "on-primary-container": "#572000",
+                        "on-secondary-container": "#342800",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "tertiary-container": "#00a8bb",
+                        "surface-tint": "#ffb693",
+                        "on-tertiary-fixed": "#001f24",
+                        "surface-dim": "#131313",
+                        "surface-variant": "#353534",
+                        "on-surface": "#e5e2e1",
+                        "on-error": "#690005",
+                        "outline": "#a98a7d",
+                        "surface-container": "#201f1f",
+                        "tertiary-fixed-dim": "#00daf3",
+                        "on-background": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#004f58",
+                        "primary-container": "#ff6b00",
+                        "primary-fixed": "#ffdbcc",
+                        "inverse-on-surface": "#313030",
+                        "on-secondary-fixed": "#241a00",
+                        "secondary": "#e9c349",
+                        "primary-fixed-dim": "#ffb693"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "container-max": "1440px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Space Grotesk"],
+                        "display-lg-mobile": ["Anybody"],
+                        "headline-xl-mobile": ["Anybody"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-xl": ["Anybody"],
+                        "body-md": ["Hanken Grotesk"],
+                        "display-lg": ["Anybody"],
+                        "label-mono": ["Space Grotesk"],
+                        "headline-md": ["Anybody"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "label-mono": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #131313; color: #e5e2e1; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .jersey-texture {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 4px);
+        }
+    </style>
+</head>
+<body class="font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/10 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(255,182,147,0.1)] transition-all duration-300 ease-out active:scale-95 hidden md:block">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-display-lg text-headline-md tracking-tighter text-primary bg-clip-text">COURTSIDE ULTRA</div>
+<div class="flex gap-8 items-center font-label-caps text-label-caps">
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-white/5 hover:shadow-[0_0_15px_rgba(255,182,147,0.3)] transition-colors py-2 px-3 rounded-DEFAULT" href="#">LIVE</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-white/5 hover:shadow-[0_0_15px_rgba(255,182,147,0.3)] transition-colors py-2 px-3 rounded-DEFAULT" href="#">ROSTER</a>
+<a class="text-primary border-b-2 border-primary pb-1 hover:bg-white/5 hover:shadow-[0_0_15px_rgba(255,182,147,0.3)] transition-colors py-2 px-3 rounded-DEFAULT" href="#">HIGHLIGHTS</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-white/5 hover:shadow-[0_0_15px_rgba(255,182,147,0.3)] transition-colors py-2 px-3 rounded-DEFAULT" href="#">SHOP</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-primary text-on-primary font-label-caps text-label-caps px-6 py-3 rounded-full hover:bg-primary/90 transition-colors shadow-[0_0_15px_rgba(255,182,147,0.3)]">
+                    WATCH LIVE
+                </button>
+<div class="flex gap-4 text-primary">
+<span class="material-symbols-outlined cursor-pointer hover:text-white transition-colors" style="font-variation-settings: 'FILL' 0;">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-white transition-colors" style="font-variation-settings: 'FILL' 0;">person</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 bg-surface-container-lowest/80 backdrop-blur-2xl border-r border-white/5 shadow-2xl flex flex-col py-8 px-4 hidden md:flex transition-all duration-300">
+<div class="mt-20 mb-12 px-4 group">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest mb-4 overflow-hidden border border-white/10 group-hover:border-primary transition-colors">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi4otO0dH0-3wxs93SQm0F7lMHzUsEAQwidZn5qn8u_4AFRjW1evMCNN9roNBignk6hESrFBECZO2VKQ0D0W0m9UmcJLRIIHmnttwrLRu4CB-EwWLXKtKbVj1mw8Fna17Z1BU_SuVhN9plaTgXjjV5MTbazITDXeCFJNh-ct34X05hmdYpwq8BqHoH2LGu0OcH8Q1u-l--NFCzmQdqyVPhfw4k_OOfMLMDU5TeImwq5sJlTbjOd42D7g54Ys-jFJXQJxduEd2rX8A"/>
+</div>
+<h3 class="font-headline-md text-primary text-body-md tracking-wide">ELITE MEMBER</h3>
+<p class="font-label-mono text-label-caps text-on-surface-variant mt-1">PRO PASS ACTIVE</p>
+</div>
+<nav class="flex-1 flex flex-col gap-2 font-body-md text-body-md">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all group-hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+                Home
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all group-hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">analytics</span>
+                Stats
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all group-hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">article</span>
+                News
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg bg-primary/10 text-primary border-r-4 border-primary group-hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+                Teams
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all group-hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto px-4 space-y-4">
+<button class="w-full py-3 border border-primary/50 text-primary rounded-full font-label-caps text-label-caps hover:bg-primary/10 transition-colors">
+                UPGRADE TO MVP
+            </button>
+<div class="flex flex-col gap-2 font-body-md text-body-md text-on-surface-variant">
+<a class="flex items-center gap-4 py-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">help</span>
+                    Help
+                </a>
+<a class="flex items-center gap-4 py-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">logout</span>
+                    Logout
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 pt-24 md:pt-32 pb-20">
+<!-- Highlights Carousel Section -->
+<section class="w-full mb-20 pl-margin-mobile md:pl-margin-desktop overflow-hidden">
+<div class="flex justify-between items-end pr-margin-mobile md:pr-margin-desktop mb-8">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">CINEMATIC REPLAYS</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2 max-w-2xl">Relive the defining moments of the season in ultra-high definition. Captured from every impossible angle.</p>
+</div>
+<div class="hidden md:flex gap-4">
+<button class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/5 transition-colors text-on-surface">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<button class="w-12 h-12 rounded-full border border-primary text-primary flex items-center justify-center hover:bg-primary/10 transition-colors shadow-[0_0_15px_rgba(255,182,147,0.2)]">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 pr-margin-mobile md:pr-margin-desktop">
+<!-- Highlight Card 1 -->
+<article class="min-w-[85vw] md:min-w-[600px] aspect-video relative rounded-xl overflow-hidden group snap-center cursor-pointer border-t border-primary/30 bg-surface-container-highest shadow-[0_10px_40px_rgba(0,0,0,0.8)] flex-shrink-0">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"></div>
+<img alt="Cinematic basketball highlight" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-700 ease-in-out group-hover:scale-105" data-alt="A high-contrast cinematic shot of a professional basketball player suspended mid-air for a slam dunk in a darkened arena. Dramatic top-down spotlighting creates a stark, moody atmosphere typical of dark minimalism. The glowing backboard and subtle rim lighting on the player evoke a premium, futuristic broadcast aesthetic. Deep blacks dominate the background, pierced by intense neon orange and electric blue stadium lights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA61IjCBAd9JS4o-53YKQY2UUh-tSkPYKycQr0PUxmrcbgYP6A9Ln0lc6WA1oCj5q7IusYB9XIXmTZAgfYvkLASx2puQZinEE8snnHOlTpQyLdfRGOwelJuxCrGwXHYOcLwPTtPEW0dj5vEIseXjdojmsCLs9jhrehMsqT6kPSEzlmISmDQWtqRb5GsJRy-MLhxMcrdCvcCH28yshq6zah5JVXdYJ7FO8rKzenSbaHq0Y65G7g3fhfgtBagf9TDYjZwa2HUGECZxr8"/>
+<div class="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<div class="w-20 h-20 rounded-full bg-background/50 backdrop-blur-md border border-primary/50 flex items-center justify-center text-primary shadow-[0_0_30px_rgba(255,182,147,0.4)]">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 p-8 z-20">
+<div class="flex items-center gap-3 mb-3">
+<span class="px-3 py-1 rounded bg-primary/20 backdrop-blur-sm border border-primary/50 font-label-caps text-[10px] text-primary tracking-widest">Q4 BUZZER BEATER</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">02:45</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">The Gravity-Defying Finish</h3>
+</div>
+</article>
+<!-- Highlight Card 2 -->
+<article class="min-w-[85vw] md:min-w-[600px] aspect-video relative rounded-xl overflow-hidden group snap-center cursor-pointer border-t border-white/10 hover:border-primary/30 transition-colors duration-500 bg-surface-container-highest flex-shrink-0">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"></div>
+<img alt="Cinematic defensive block highlight" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity duration-700 ease-in-out group-hover:scale-105 filter grayscale group-hover:grayscale-0" data-alt="A macro, low-angle shot of a basketball rim and net dramatically lit against a pitch-black background. A player's hand reaches into frame to execute a powerful defensive block. The scene utilizes severe high-contrast lighting, emphasizing the metallic textures of the rim and the kinetic energy of the motion. The aesthetic is ultra-modern, dark, and highly atmospheric, capturing the raw intensity of professional sports." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACHKegrGumoVhdGQBTzyO7XRUKgiC9v33OCOdyUc61Xrf_YOSw1Q_1OTPxWRdAsf8dt9Xmw1sQpfx-9NPxyD-WwNwC6A0oDVJwJIFc3EBMBAH4HN9DtlHKtZVfJ76V_c8dK02BzvbcJofxK-j4dbpjVqbf0HWd8U15_DG1IW_PgjRrGzW5DyQG1Eb-H3FWBwHkpCfE0hxd6RChyhPz86V8wtjzqOqLyBqBllKuCkbmy-4mQ1ry5wh8FKF6fswofRvOBNS5I4n9kRg"/>
+<div class="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<div class="w-20 h-20 rounded-full bg-background/50 backdrop-blur-md border border-primary/50 flex items-center justify-center text-primary shadow-[0_0_30px_rgba(255,182,147,0.4)]">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 p-8 z-20">
+<div class="flex items-center gap-3 mb-3">
+<span class="px-3 py-1 rounded bg-surface-container/50 backdrop-blur-sm border border-white/20 font-label-caps text-[10px] text-on-surface tracking-widest">DEFENSIVE MASTERCLASS</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">01:12</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Unbreakable Wall</h3>
+</div>
+</article>
+<!-- Highlight Card 3 -->
+<article class="min-w-[85vw] md:min-w-[600px] aspect-video relative rounded-xl overflow-hidden group snap-center cursor-pointer border-t border-white/10 hover:border-primary/30 transition-colors duration-500 bg-surface-container-highest flex-shrink-0">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"></div>
+<img alt="Cinematic crowd reaction highlight" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity duration-700 ease-in-out group-hover:scale-105 filter grayscale group-hover:grayscale-0" data-alt="A wide, sweeping cinematic view of a massive indoor stadium interior, bathed in deep shadows and stark geometric beams of light from overhead LED arrays. The focal point is the glowing hardwood court in the distance, surrounded by a sea of darkened, blurred spectator seating. The lighting is moody and dramatic, embodying a premium dark minimalism style with subtle hints of neon team colors cutting through the atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB10aLlnfhCMSkLTstqr-fZniIUrIqvYrcqLqbeER95mu071TLFcJ2GmLzMfmGtOQs0FqzkbSeOXmblSXhERowpfrvKATqlmXXahing9qztyd0MfRTKuE37ZWjT2xk8GsEx0NZzgMAgrZVOcanxGZFY9k2Lbfd7alYZOMa8gJoLu2hhAqxB71USxnDKcp_QywZYMp2JeR8EkX49prdbNzmt6yXUv3bnvWPMvhJu2t_zxi1CF9-S40MAE09-UCSRopkFOM0LvTdtDT4"/>
+<div class="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<div class="w-20 h-20 rounded-full bg-background/50 backdrop-blur-md border border-primary/50 flex items-center justify-center text-primary shadow-[0_0_30px_rgba(255,182,147,0.4)]">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 p-8 z-20">
+<div class="flex items-center gap-3 mb-3">
+<span class="px-3 py-1 rounded bg-surface-container/50 backdrop-blur-sm border border-white/20 font-label-caps text-[10px] text-on-surface tracking-widest">CROWD ERUPTION</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">00:45</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">The Arena Shakes</h3>
+</div>
+</article>
+</div>
+</section>
+<!-- Team Grid Section -->
+<section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="mb-10 border-b border-white/10 pb-6 flex flex-col md:flex-row justify-between md:items-end gap-4">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">TEAM DIRECTORY</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Access roster details, season stats, and exclusive team merchandise.</p>
+</div>
+<div class="relative w-full md:w-64">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">search</span>
+<input class="w-full bg-surface-container-low border-b border-white/20 text-on-surface pl-12 pr-4 py-3 focus:outline-none focus:border-primary focus:shadow-[0_4px_20px_-10px_rgba(255,182,147,0.5)] transition-all font-body-md text-body-md bg-transparent rounded-t-sm" placeholder="Search teams..." type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+<!-- Team Card 1 -->
+<a class="aspect-square bg-surface-container-lowest border border-white/5 rounded-xl flex flex-col items-center justify-center p-6 group transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[0_10px_30px_rgba(255,182,147,0.15)] relative overflow-hidden jersey-texture" href="#">
+<div class="absolute inset-0 bg-gradient-to-br from-transparent to-black/80 z-0"></div>
+<div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-surface-container-high/50 border border-white/10 flex items-center justify-center mb-4 z-10 group-hover:scale-110 transition-transform duration-500 shadow-inner">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:text-primary transition-colors" style="font-variation-settings: 'FILL' 0;">sports_basketball</span>
+</div>
+<div class="z-10 text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary transition-colors">LOS ANGELES</p>
+<h3 class="font-headline-md text-body-lg md:text-headline-md text-on-surface mt-1">LAKERS</h3>
+</div>
+</a>
+<!-- Team Card 2 -->
+<a class="aspect-square bg-surface-container-lowest border border-white/5 rounded-xl flex flex-col items-center justify-center p-6 group transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[0_10px_30px_rgba(255,182,147,0.15)] relative overflow-hidden jersey-texture" href="#">
+<div class="absolute inset-0 bg-gradient-to-br from-transparent to-black/80 z-0"></div>
+<div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-surface-container-high/50 border border-white/10 flex items-center justify-center mb-4 z-10 group-hover:scale-110 transition-transform duration-500 shadow-inner">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:text-primary transition-colors" style="font-variation-settings: 'FILL' 0;">sports_basketball</span>
+</div>
+<div class="z-10 text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary transition-colors">GOLDEN STATE</p>
+<h3 class="font-headline-md text-body-lg md:text-headline-md text-on-surface mt-1">WARRIORS</h3>
+</div>
+</a>
+<!-- Team Card 3 -->
+<a class="aspect-square bg-surface-container-lowest border border-white/5 rounded-xl flex flex-col items-center justify-center p-6 group transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[0_10px_30px_rgba(255,182,147,0.15)] relative overflow-hidden jersey-texture" href="#">
+<div class="absolute inset-0 bg-gradient-to-br from-transparent to-black/80 z-0"></div>
+<div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-surface-container-high/50 border border-white/10 flex items-center justify-center mb-4 z-10 group-hover:scale-110 transition-transform duration-500 shadow-inner">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:text-primary transition-colors" style="font-variation-settings: 'FILL' 0;">sports_basketball</span>
+</div>
+<div class="z-10 text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary transition-colors">BOSTON</p>
+<h3 class="font-headline-md text-body-lg md:text-headline-md text-on-surface mt-1">CELTICS</h3>
+</div>
+</a>
+<!-- Team Card 4 -->
+<a class="aspect-square bg-surface-container-lowest border border-white/5 rounded-xl flex flex-col items-center justify-center p-6 group transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[0_10px_30px_rgba(255,182,147,0.15)] relative overflow-hidden jersey-texture" href="#">
+<div class="absolute inset-0 bg-gradient-to-br from-transparent to-black/80 z-0"></div>
+<div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-surface-container-high/50 border border-white/10 flex items-center justify-center mb-4 z-10 group-hover:scale-110 transition-transform duration-500 shadow-inner">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:text-primary transition-colors" style="font-variation-settings: 'FILL' 0;">sports_basketball</span>
+</div>
+<div class="z-10 text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary transition-colors">MIAMI</p>
+<h3 class="font-headline-md text-body-lg md:text-headline-md text-on-surface mt-1">HEAT</h3>
+</div>
+</a>
+<!-- Team Card 5 -->
+<a class="aspect-square bg-surface-container-lowest border border-white/5 rounded-xl flex flex-col items-center justify-center p-6 group transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[0_10px_30px_rgba(255,182,147,0.15)] relative overflow-hidden jersey-texture" href="#">
+<div class="absolute inset-0 bg-gradient-to-br from-transparent to-black/80 z-0"></div>
+<div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-surface-container-high/50 border border-white/10 flex items-center justify-center mb-4 z-10 group-hover:scale-110 transition-transform duration-500 shadow-inner">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:text-primary transition-colors" style="font-variation-settings: 'FILL' 0;">sports_basketball</span>
+</div>
+<div class="z-10 text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary transition-colors">CHICAGO</p>
+<h3 class="font-headline-md text-body-lg md:text-headline-md text-on-surface mt-1">BULLS</h3>
+</div>
+</a>
+<!-- Card 6 -->
+<a class="aspect-square bg-surface-container-lowest border border-white/5 rounded-xl flex flex-col items-center justify-center p-6 group transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[0_10px_30px_rgba(255,182,147,0.15)] relative overflow-hidden jersey-texture" href="#">
+<div class="absolute inset-0 bg-gradient-to-br from-transparent to-black/80 z-0"></div>
+<div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-surface-container-high/50 border border-white/10 flex items-center justify-center mb-4 z-10 group-hover:scale-110 transition-transform duration-500 shadow-inner">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:text-primary transition-colors" style="font-variation-settings: 'FILL' 0;">sports_basketball</span>
+</div>
+<div class="z-10 text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary transition-colors">NEW YORK</p>
+<h3 class="font-headline-md text-body-lg md:text-headline-md text-on-surface mt-1">KNICKS</h3>
+</div>
+</a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-margin-mobile border-t border-outline-variant bg-surface-container-lowest flat no shadows transition-opacity duration-300 md:ml-64 mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-gutter max-w-container-max mx-auto">
+<div class="font-display-lg text-headline-md text-on-surface">COURTSIDE ULTRA</div>
+<div class="font-label-mono text-label-mono text-outline">© 2024 COURTSIDE ULTRA. ALL RIGHTS RESERVED.</div>
+<div class="flex flex-wrap justify-center gap-6 font-label-mono text-label-mono">
+<a class="text-outline hover:text-on-surface hover:underline transition-colors" href="#">Privacy Policy</a>
+<a class="text-outline hover:text-on-surface hover:underline transition-colors" href="#">Terms of Service</a>
+<a class="text-outline hover:text-on-surface hover:underline transition-colors" href="#">Cookie Settings</a>
+<a class="text-outline hover:text-on-surface hover:underline transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+</body></html>

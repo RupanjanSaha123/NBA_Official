@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #0A0A0A;
+    color: #e5e2e1;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Glassmorphism Panels */
+.glass-panel {
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 1px solid rgba(255, 255, 255, 0.04);
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Glass Buttons with Premium Gold/Orange Reflections */
+.glass-button-ghost {
+  border: 1px solid #af8d11; /* Metallic Gold border */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0) 100%);
+  backdrop-filter: blur(10px);
+}
+
+.glass-button-primary {
+  border: 1px solid rgba(255, 107, 0, 0.5); /* Neon orange border */
+  background: linear-gradient(180deg, rgba(255, 107, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+  backdrop-filter: blur(10px);
+}
+
+/* Ambient Spotlights */
+.spotlight-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.spotlight-blue {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 218, 243, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+  animation: moveSpotlightBlue 24s infinite alternate ease-in-out;
+  filter: blur(80px);
+}
+
+.spotlight-orange {
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 107, 0, 0.06) 0%, rgba(0, 0, 0, 0) 70%);
+  animation: moveSpotlightOrange 30s infinite alternate ease-in-out;
+  filter: blur(90px);
+  top: -10%;
+  right: -10%;
+}
+
+@keyframes moveSpotlightBlue {
+  0% { transform: translate(-20%, -20%) scale(1); }
+  50% { transform: translate(40%, 20%) scale(1.15); }
+  100% { transform: translate(-10%, 40%) scale(0.9); }
+}
+
+@keyframes moveSpotlightOrange {
+  0% { transform: translate(10%, -10%) scale(0.9); }
+  50% { transform: translate(-30%, 30%) scale(1.1); }
+  100% { transform: translate(20%, 10%) scale(1); }
+}
+
+/* Rim Lighting */
+.rim-light-orange::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  border-top: 1.5px solid rgba(255, 182, 147, 0.25);
+  border-left: 1px solid rgba(255, 182, 147, 0.1);
+  pointer-events: none;
+}
+
+.rim-light-gold::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  border-top: 1.5px solid rgba(233, 195, 73, 0.25);
+  border-left: 1px solid rgba(233, 195, 73, 0.1);
+  pointer-events: none;
+}
+
+.rim-light-blue::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  border-top: 1.5px solid rgba(0, 218, 243, 0.25);
+  border-left: 1px solid rgba(0, 218, 243, 0.1);
+  pointer-events: none;
+}
+
+/* Holographic Glare Sweeping Effect */
+.holographic-glare {
+  background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.03) 25%, rgba(0, 218, 243, 0.05) 28%, transparent 35%);
+  background-size: 250% 250%;
+  background-position: 0% 0%;
+  transition: background-position 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .holographic-glare {
+  background-position: 100% 100%;
+}
+
+/* Metallic Text Gradients */
+.metallic-gold-text {
+  background: linear-gradient(135deg, #FFF6D1 0%, #E9C349 50%, #AF8D11 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.metallic-orange-text {
+  background: linear-gradient(135deg, #FFDBCC 0%, #FF6B00 60%, #A04100 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Text Reflective Under-Glow */
+.glow-text-orange {
+  text-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+}
+
+.glow-text-gold {
+  text-shadow: 0 0 20px rgba(233, 195, 73, 0.2);
+}
+
+.glow-text-blue {
+  text-shadow: 0 0 20px rgba(0, 218, 243, 0.3);
+}
+
+/* Jersey Athletic Pinhole Texture overlay */
+.jersey-texture {
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(255,255,255,0.015) 3px, rgba(255,255,255,0.015) 6px);
+}
+
+/* Hide Scrollbars */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Dust Particle Effects */
+.dust-particle {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Live Indicator Ripple */
+@keyframes pulseRipple {
+  0% { box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.6); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 107, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 107, 0, 0); }
+}
+.live-indicator-ripple {
+  animation: pulseRipple 1.8s infinite;
+}
+
+/* Custom 3D Floating Animations */
+@keyframes slowFloat {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+.float-element {
+  animation: slowFloat 6s ease-in-out infinite;
+}
+
+.float-element-reverse {
+  animation: slowFloat 7s ease-in-out infinite reverse;
+}
