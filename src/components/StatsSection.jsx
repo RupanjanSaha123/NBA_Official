@@ -2,15 +2,76 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Tv, Sparkles, TrendingUp, ChevronRight, Activity } from 'lucide-react';
 
-export default function StatsSection() {
+export default function StatsSection({ socket }) {
   const [activeTab, setActiveTab] = useState('momentum'); // momentum | stats | play-by-play
   const [timeLeft, setTimeLeft] = useState(134); // 2:14 in seconds
   const [isPlaying, setIsPlaying] = useState(true);
   const [lalScore, setLalScore] = useState(112);
   const [bosScore, setBosScore] = useState(108);
 
-  // Scoreboard ticking timer loop
+  // Live Commentary logs
+  const [commentaries, setCommentaries] = useState([
+    { id: 1, time: 'Q4 02:14', text: 'Lakers call timeout. Play stops as LeBron drives to the basket.' },
+    { id: 2, time: 'Q4 02:35', text: 'Tatum sinks a step-back three! Celtics trail by 4 points.' },
+    { id: 3, time: 'Q4 03:02', text: 'Davis block on Jaylen Brown in the paint. Loose ball recovered by Lakers.' }
+  ]);
+
+  // Real-time Chat states
+  const [rightTab, setRightTab] = useState('commentary'); // commentary | chat
+  const [messages, setMessages] = useState([]);
+  const [chatInput, setChatInput] = useState('');
+  const [username, setUsername] = useState('');
+  const [isUsernameSet, setIsUsernameSet] = useState(false);
+  const chatEndRef = useRef(null);
+
+  // Fetch initial commentary list from API
   useEffect(() => {
+    fetch('/api/commentary')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setCommentaries(data);
+        }
+      })
+      .catch(err => console.error('Error fetching commentary:', err));
+  }, []);
+
+  // Listen to WebSocket events (Synced scores, commentaries, fan chat messages)
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on('score_update', (data) => {
+      setLalScore(data.lalScore);
+      setBosScore(data.bosScore);
+      setTimeLeft(data.timeLeft);
+      setIsPlaying(data.isPlaying);
+    });
+
+    socket.on('commentary_update', (data) => {
+      setCommentaries(data);
+    });
+
+    socket.on('receive_message', (message) => {
+      setMessages(prev => [...prev, message]);
+    });
+
+    return () => {
+      socket.off('score_update');
+      socket.off('commentary_update');
+      socket.off('receive_message');
+    };
+  }, [socket]);
+
+  // Auto-scroll chat history
+  useEffect(() => {
+    if (chatEndRef.current) {
+      chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
+  // Local Ticking Loop Fallback (Only active if backend Socket is disconnected)
+  useEffect(() => {
+    if (socket) return; 
     if (!isPlaying) return;
     const interval = setInterval(() => {
       setTimeLeft(prev => {
@@ -18,8 +79,6 @@ export default function StatsSection() {
           setIsPlaying(false);
           return 0;
         }
-        
-        // Randomly simulate scores increasing occasionally!
         if (Math.random() > 0.88) {
           if (Math.random() > 0.5) {
             setLalScore(s => s + (Math.random() > 0.6 ? 3 : 2));
@@ -27,13 +86,12 @@ export default function StatsSection() {
             setBosScore(s => s + (Math.random() > 0.6 ? 3 : 2));
           }
         }
-        
         return prev - 1;
       });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isPlaying]);
+  }, [isPlaying, socket]);
 
   const formatTime = (secs) => {
     const mins = Math.floor(secs / 60);
@@ -42,10 +100,34 @@ export default function StatsSection() {
   };
 
   const resetClock = () => {
-    setTimeLeft(134);
-    setLalScore(112);
-    setBosScore(108);
-    setIsPlaying(true);
+    if (socket) {
+      socket.emit('reset_simulator');
+    } else {
+      setTimeLeft(134);
+      setLalScore(112);
+      setBosScore(108);
+      setIsPlaying(true);
+    }
+  };
+
+  const togglePlay = () => {
+    if (socket) {
+      socket.emit('toggle_simulator');
+    } else {
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    if (!chatInput.trim() || !socket) return;
+    
+    socket.emit('send_message', {
+      username: username || 'Anonymous Fan',
+      text: chatInput,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    });
+    setChatInput('');
   };
 
   const bgImgUrl = "https://lh3.googleusercontent.com/aida-public/AB6AXuBMjTpDU-fAz5xfMNFdxt1eoNcjNA_V5MOTkRJQyG8aXEPF8WmfTmTi32fRDf1eKQvvmrMXTW3FwsXnPgtKXIDQwAnX7Mo9Ex2HbhR5OkKKRgyZcvY28v39DdzmnkjNrzeKU5fRyBBmt8oLQRxYy1gW0My_7PvVxhhp2juncJ8PgVXMHtQusK3c0wkEh8B0pAude8H645LQAneBra1PXoHrsaXejg9tZpGuexXSKXX6-eRI8qzDaGbrPCoAZ9tjpvGdwLAQnoxRlEg";
@@ -95,7 +177,7 @@ export default function StatsSection() {
           {/* Clock, Live Score and Indicators */}
           <div className="flex flex-col items-center justify-center text-center">
             <div 
-              onClick={() => setIsPlaying(!isPlaying)}
+              onClick={togglePlay}
               className="flex items-center gap-2 mb-3 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full cursor-pointer hover:bg-primary/20 transition-all select-none"
             >
               <span className={`w-2 h-2 rounded-full bg-primary ${isPlaying ? 'live-indicator-ripple' : ''}`} />
@@ -115,7 +197,7 @@ export default function StatsSection() {
             </div>
             
             <div 
-              onClick={() => setIsPlaying(!isPlaying)}
+              onClick={togglePlay}
               className="mt-6 glass-panel px-6 py-2 rounded-full border border-white/10 shadow-[0_0_15px_rgba(0,218,243,0.1)] hover:border-tertiary/50 transition-colors cursor-pointer select-none"
             >
               <span className="font-label-mono text-lg text-tertiary font-bold tracking-widest">
@@ -336,38 +418,114 @@ export default function StatsSection() {
 
         </div>
 
-        {/* Live Broadcast Feed HUD Widget (Right column) */}
-        <div className="lg:col-span-4 glass-panel p-6 rounded-xl border border-white/5 flex flex-col justify-between relative overflow-hidden">
+        {/* Live Broadcast Feed HUD Widget / Chat (Right column) */}
+        <div className="lg:col-span-4 glass-panel p-6 rounded-xl border border-white/5 flex flex-col justify-between relative overflow-hidden min-h-[380px]">
           <div className="absolute top-0 right-0 w-32 h-32 bg-tertiary/5 blur-2xl rounded-full pointer-events-none" />
           
-          <div className="space-y-4">
-            <span className="font-label-caps text-[9px] text-tertiary px-2 py-0.5 bg-tertiary/10 border border-tertiary/20 rounded-full tracking-widest inline-block font-bold">
-              BROADCAST LOG
-            </span>
-            
-            <h4 className="font-headline-md text-base text-on-surface font-semibold tracking-tight uppercase">Live Commentary</h4>
-            
-            <div className="space-y-4 overflow-y-auto max-h-[200px] custom-scrollbar font-body-md text-xs text-on-surface-variant pr-1">
-              <div className="border-l border-primary/40 pl-3 py-0.5">
-                <span className="font-label-mono text-[9px] text-primary font-bold">Q4 02:14</span>
-                <p className="mt-0.5 text-on-surface">Lakers call timeout. Play stops as LeBron drives to the basket.</p>
+          <div className="space-y-4 flex-1 flex flex-col">
+            {/* Header Tabs */}
+            <div className="flex justify-between items-center border-b border-white/5 pb-2">
+              <div className="flex gap-4 font-label-caps text-[10px]">
+                <button 
+                  onClick={() => setRightTab('commentary')}
+                  className={`pb-1 relative font-bold transition-colors ${rightTab === 'commentary' ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface'}`}
+                >
+                  BROADCAST LOG
+                  {rightTab === 'commentary' && <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-primary rounded-full" />}
+                </button>
+                
+                <button 
+                  onClick={() => setRightTab('chat')}
+                  className={`pb-1 relative font-bold transition-colors ${rightTab === 'chat' ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface'}`}
+                >
+                  FAN CHAT ROOM
+                  {rightTab === 'chat' && <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-primary rounded-full" />}
+                </button>
               </div>
-              <div className="border-l border-white/10 pl-3 py-0.5">
-                <span className="font-label-mono text-[9px] text-on-surface-variant">Q4 02:35</span>
-                <p className="mt-0.5">Tatum sinks a step-back three! Celtics trail by 4 points.</p>
-              </div>
-              <div className="border-l border-white/10 pl-3 py-0.5">
-                <span className="font-label-mono text-[9px] text-on-surface-variant">Q4 03:02</span>
-                <p className="mt-0.5">Davis block on Jaylen Brown in the paint. Loose ball recovered by Lakers.</p>
-              </div>
+
+              <span className="flex items-center gap-1.5 font-label-mono text-[8px] text-tertiary">
+                <Activity size={10} className="animate-pulse" />
+                {rightTab === 'commentary' ? 'FEED LIVE' : 'SYNC ONLINE'}
+              </span>
             </div>
+            
+            {rightTab === 'commentary' ? (
+              <div className="space-y-4 overflow-y-auto max-h-[240px] custom-scrollbar font-body-md text-xs text-on-surface-variant pr-1 flex-1 mt-2">
+                {commentaries.map(comm => (
+                  <div key={comm.id} className="border-l border-primary/40 pl-3 py-0.5">
+                    <span className="font-label-mono text-[9px] text-primary font-bold">{comm.time}</span>
+                    <p className="mt-0.5 text-on-surface">{comm.text}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex-1 flex flex-col justify-between mt-2 min-h-[240px]">
+                {!isUsernameSet ? (
+                  <form onSubmit={(e) => { e.preventDefault(); if (username.trim()) setIsUsernameSet(true); }} className="space-y-3 flex flex-col justify-center h-full flex-1">
+                    <p className="text-[9px] text-on-surface-variant font-label-mono uppercase tracking-wider text-center">Choose a Username to Join</p>
+                    <input 
+                      type="text"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      placeholder="e.g. LakersFan99"
+                      className="w-full bg-surface-container-lowest/80 border border-white/10 text-on-surface px-4 py-3 focus:outline-none focus:border-primary text-xs rounded rim-light-orange"
+                      maxLength={15}
+                      required
+                    />
+                    <button type="submit" className="w-full py-3 bg-primary text-black font-label-caps text-[10px] font-bold rounded hover:bg-surface-tint transition-all hover:scale-102 active:scale-98">
+                      ENTER FAN CHAT
+                    </button>
+                  </form>
+                ) : (
+                  <div className="flex flex-col h-full justify-between gap-3 flex-1">
+                    {/* Message list */}
+                    <div className="flex-1 overflow-y-auto custom-scrollbar space-y-2.5 pr-1 max-h-[190px]">
+                      {messages.length === 0 ? (
+                        <div className="text-center py-8 text-on-surface-variant/40 text-xs italic font-body-md">
+                          No messages yet. Start the conversation!
+                        </div>
+                      ) : (
+                        messages.map((msg) => (
+                          <div key={msg.id} className="text-xs">
+                            <div className="flex justify-between items-baseline">
+                              <span className="font-bold text-secondary font-label-caps text-[9px]">{msg.username}</span>
+                              <span className="text-[8px] text-on-surface-variant font-label-mono opacity-50">{msg.timestamp}</span>
+                            </div>
+                            <p className="text-on-surface mt-0.5 leading-relaxed bg-white/5 rounded px-2.5 py-1.5 border border-white/5 font-body-md">
+                              {msg.text}
+                            </p>
+                          </div>
+                        ))
+                      )}
+                      <div ref={chatEndRef} />
+                    </div>
+                    
+                    {/* Chat Form */}
+                    <form onSubmit={handleSendMessage} className="flex gap-2 border-t border-white/5 pt-2">
+                      <input 
+                        type="text"
+                        value={chatInput}
+                        onChange={(e) => setChatInput(e.target.value)}
+                        placeholder="Send message to arena..."
+                        className="flex-1 bg-surface-container-lowest/80 border border-white/10 text-on-surface px-3 py-2 rounded focus:outline-none focus:border-primary text-xs"
+                        maxLength={100}
+                        required
+                      />
+                      <button type="submit" className="px-4 bg-primary text-black font-label-caps text-[9px] font-bold rounded hover:bg-surface-tint transition-all active:scale-95">
+                        SEND
+                      </button>
+                    </form>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
-          <div className="pt-4 border-t border-white/5 flex justify-between items-center text-[10px] font-label-mono">
-            <span className="text-on-surface-variant">ABC DIRECT FEED</span>
+          <div className="pt-4 border-t border-white/5 flex justify-between items-center text-[10px] font-label-mono mt-4">
+            <span className="text-on-surface-variant">{rightTab === 'commentary' ? 'ABC DIRECT FEED' : 'LIVE FAN HUB'}</span>
             <span className="text-primary animate-pulse font-bold flex items-center gap-1">
               <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-              FEED ONLINE
+              ONLINE
             </span>
           </div>
 

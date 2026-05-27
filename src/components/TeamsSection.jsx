@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, ChevronRight, Dribbble } from 'lucide-react';
 
 export default function TeamsSection() {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const teams = [
+  const fallbackTeams = [
     { id: 'lal', city: 'LOS ANGELES', name: 'LAKERS', short: 'LAL', division: 'PACIFIC', rank: '#3 West', color: 'group-hover:text-secondary', logo: '/Assets/lakers.jpg' },
     { id: 'gsw', city: 'GOLDEN STATE', name: 'WARRIORS', short: 'GSW', division: 'PACIFIC', rank: '#8 West', color: 'group-hover:text-amber-500', logo: '/Assets/warriors.jpg' },
     { id: 'bos', city: 'BOSTON', name: 'CELTICS', short: 'BOS', division: 'ATLANTIC', rank: '#1 East', color: 'group-hover:text-emerald-400', logo: '/Assets/boston Celtics.jpg' },
@@ -15,6 +15,19 @@ export default function TeamsSection() {
     { id: 'phx', city: 'PHOENIX', name: 'SUNS', short: 'PHX', division: 'PACIFIC', rank: '#6 West', color: 'group-hover:text-orange-400', logo: 'https://upload.wikimedia.org/wikipedia/en/d/dc/Phoenix_Suns_logo.svg' },
     { id: 'mil', city: 'MILWAUKEE', name: 'BUCKS', short: 'MIL', division: 'CENTRAL', rank: '#3 East', color: 'group-hover:text-green-500', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Milwaukee_Bucks_logo.svg' }
   ];
+
+  const [teams, setTeams] = useState(fallbackTeams);
+
+  useEffect(() => {
+    fetch('/api/teams')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setTeams(data);
+        }
+      })
+      .catch(err => console.error('Error fetching teams from backend:', err));
+  }, []);
 
   const filteredTeams = teams.filter(team => 
     team.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

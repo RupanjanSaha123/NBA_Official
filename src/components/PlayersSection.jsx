@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Activity, Flame, ShieldAlert, Award, Star } from 'lucide-react';
 
 export default function PlayersSection() {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 
-  const players = [
+  const fallbackPlayers = [
     {
       id: 1,
       number: '00',
@@ -49,6 +49,19 @@ export default function PlayersSection() {
       img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC8GBrlkLw1kzG6yP1XelRurKxIdxD6gSDfqD_Y2JBuiDhebnkUxS4Xs54TY6tanvVOfeJuIdUMEeeQ55gapzqgqCyAKVnKjXNDqjDTO4f29igETLKEO5UaUtd8BYVl-16h8DNoXBT6bmC7oa15oa65VDTTUt79ecTVThv8H1wLkdpnNTpyXV5rJC-2GtKlCgQhMePvADkBzNPt1EbF5YXvXtwfSQqx4d7mUXBNdlS8AreJMbpg8h1yzoEhPxaKPkFt3hq0mQoChdQ'
     }
   ];
+
+  const [players, setPlayers] = useState(fallbackPlayers);
+
+  useEffect(() => {
+    fetch('/api/players')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setPlayers(data);
+        }
+      })
+      .catch(err => console.error('Error fetching players from backend:', err));
+  }, []);
 
   // Mouse hover 3D tilt handler
   const handleMouseMove = (e, playerId) => {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { io } from 'socket.io-client';
 import TopNavBar from './components/TopNavBar';
 import SideNavBar from './components/SideNavBar';
 import HeroSection from './components/HeroSection';
@@ -15,6 +16,17 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('hero');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const cursorGlowRef = useRef(null);
+
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    const newSocket = io('http://127.0.0.1:5000');
+    setSocket(newSocket);
+
+    return () => {
+      newSocket.disconnect();
+    };
+  }, []);
 
   // Scroll progress for the side indicator track
   const { scrollYProgress } = useScroll();
@@ -165,7 +177,7 @@ export default function App() {
 
           {/* Section 2: Scoreboard & Live stats dashboard */}
           <div id="stats" className="scroll-mt-20 border-t border-white/5 bg-black/10">
-            <StatsSection />
+            <StatsSection socket={socket} />
           </div>
 
           {/* Section 3: Featured Roster Players */}
