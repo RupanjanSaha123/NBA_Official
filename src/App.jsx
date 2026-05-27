@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import TopNavBar from './components/TopNavBar';
 import SideNavBar from './components/SideNavBar';
 import HeroSection from './components/HeroSection';
@@ -14,6 +15,11 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('hero');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const cursorGlowRef = useRef(null);
+
+  // Scroll progress for the side indicator track
+  const { scrollYProgress } = useScroll();
+  const sideBallY = useTransform(scrollYProgress, [0, 1], ["0%", "96%"]);
+  const sideBallRotate = useTransform(scrollYProgress, [0, 1], [0, 1440]);
 
   // Smooth scroll handler
   const scrollToSection = (id) => {
@@ -102,6 +108,43 @@ export default function App() {
           background: 'radial-gradient(circle, rgba(255, 182, 147, 0.06) 0%, rgba(0,0,0,0) 70%)',
         }}
       />
+
+      {/* Premium Scroll progress indicator with rotating 3D basketball */}
+      <div className="fixed right-6 top-1/4 bottom-1/4 w-8 z-[9999] pointer-events-none hidden xl:flex flex-col items-center">
+        {/* Track Line */}
+        <div className="w-[1.5px] h-full bg-white/5 rounded-full relative">
+          {/* Active Progress glow */}
+          <motion.div 
+            style={{ scaleY: scrollYProgress }}
+            className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary via-secondary to-tertiary rounded-full origin-top shadow-[0_0_8px_rgba(255,107,0,0.3)]"
+          />
+          
+          {/* Scroll progress text rotated vertically */}
+          <div className="absolute right-4 top-0 font-label-mono text-[8px] text-on-surface-variant tracking-[0.2em] origin-top-right rotate-90 select-none opacity-40 whitespace-nowrap">
+            COURTSIDE STANDINGS
+          </div>
+          
+          {/* Travelling rotating 3D basketball */}
+          <motion.div 
+            style={{ y: sideBallY, rotate: sideBallRotate }}
+            className="absolute -left-[11px] w-6 h-6 rounded-full shadow-[0_0_12px_rgba(255,107,0,0.6)] border border-primary/40 bg-black overflow-hidden"
+          >
+            <img 
+              src="/Assets/basketball.png" 
+              alt="Scroll progress basketball" 
+              className="w-full h-full object-cover"
+            />
+            {/* Shading to make the miniature ball look 3D */}
+            <div 
+              className="absolute inset-0 rounded-full pointer-events-none"
+              style={{
+                background: 'radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.3) 0%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0.95) 100%)',
+                mixBlendMode: 'multiply'
+              }}
+            />
+          </motion.div>
+        </div>
+      </div>
 
       {/* Top Navbar */}
       <TopNavBar activeSection={activeSection} scrollToSection={scrollToSection} setSidebarOpen={setSidebarOpen} />
