@@ -6,14 +6,14 @@ export default function TeamsSection() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const teams = [
-    { id: 'lal', city: 'LOS ANGELES', name: 'LAKERS', short: 'LAL', division: 'PACIFIC', rank: '#3 West', color: 'group-hover:text-secondary' },
-    { id: 'gsw', city: 'GOLDEN STATE', name: 'WARRIORS', short: 'GSW', division: 'PACIFIC', rank: '#8 West', color: 'group-hover:text-amber-500' },
-    { id: 'bos', city: 'BOSTON', name: 'CELTICS', short: 'BOS', division: 'ATLANTIC', rank: '#1 East', color: 'group-hover:text-emerald-400' },
-    { id: 'mia', city: 'MIAMI', name: 'HEAT', short: 'MIA', division: 'SOUTHEAST', rank: '#5 East', color: 'group-hover:text-red-500' },
-    { id: 'chi', city: 'CHICAGO', name: 'BULLS', short: 'CHI', division: 'CENTRAL', rank: '#9 East', color: 'group-hover:text-red-600' },
-    { id: 'nyk', city: 'NEW YORK', name: 'KNICKS', short: 'NYK', division: 'ATLANTIC', rank: '#2 East', color: 'group-hover:text-orange-500' },
-    { id: 'phx', city: 'PHOENIX', name: 'SUNS', short: 'PHX', division: 'PACIFIC', rank: '#6 West', color: 'group-hover:text-orange-400' },
-    { id: 'mil', city: 'MILWAUKEE', name: 'BUCKS', short: 'MIL', division: 'CENTRAL', rank: '#3 East', color: 'group-hover:text-green-500' }
+    { id: 'lal', city: 'LOS ANGELES', name: 'LAKERS', short: 'LAL', division: 'PACIFIC', rank: '#3 West', color: 'group-hover:text-secondary', logo: '/Assets/lakers.jpg' },
+    { id: 'gsw', city: 'GOLDEN STATE', name: 'WARRIORS', short: 'GSW', division: 'PACIFIC', rank: '#8 West', color: 'group-hover:text-amber-500', logo: '/Assets/warriors.jpg' },
+    { id: 'bos', city: 'BOSTON', name: 'CELTICS', short: 'BOS', division: 'ATLANTIC', rank: '#1 East', color: 'group-hover:text-emerald-400', logo: '/Assets/boston Celtics.jpg' },
+    { id: 'mia', city: 'MIAMI', name: 'HEAT', short: 'MIA', division: 'SOUTHEAST', rank: '#5 East', color: 'group-hover:text-red-500', logo: '/Assets/miami Heats.jpg' },
+    { id: 'chi', city: 'CHICAGO', name: 'BULLS', short: 'CHI', division: 'CENTRAL', rank: '#9 East', color: 'group-hover:text-red-600', logo: '/Assets/bulls.jpg' },
+    { id: 'nyk', city: 'NEW YORK', name: 'KNICKS', short: 'NYK', division: 'ATLANTIC', rank: '#2 East', color: 'group-hover:text-orange-500', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/28/New_York_Knicks_logo.svg' },
+    { id: 'phx', city: 'PHOENIX', name: 'SUNS', short: 'PHX', division: 'PACIFIC', rank: '#6 West', color: 'group-hover:text-orange-400', logo: 'https://upload.wikimedia.org/wikipedia/en/d/dc/Phoenix_Suns_logo.svg' },
+    { id: 'mil', city: 'MILWAUKEE', name: 'BUCKS', short: 'MIL', division: 'CENTRAL', rank: '#3 East', color: 'group-hover:text-green-500', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Milwaukee_Bucks_logo.svg' }
   ];
 
   const filteredTeams = teams.filter(team => 
@@ -70,9 +70,17 @@ export default function TeamsSection() {
               {/* Holographic rim top glow */}
               <div className="absolute top-0 left-0 w-full h-[1.5px] bg-gradient-to-r from-transparent via-white/15 to-transparent z-10" />
 
-              {/* Central vector ball icon */}
-              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-surface-container-high/50 border border-white/5 flex items-center justify-center mb-4 z-10 group-hover:scale-108 transition-all duration-500 shadow-inner group-hover:border-primary/20">
-                <Dribbble size={40} className={`text-on-surface-variant transition-colors duration-300 ${team.color}`} />
+              {/* Central team logo / icon */}
+              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white flex items-center justify-center mb-4 z-10 group-hover:scale-108 transition-all duration-500 shadow-[0_4px_12px_rgba(0,0,0,0.15)] group-hover:shadow-[0_8px_24px_rgba(255,182,147,0.25)] border border-white/10 overflow-hidden p-2.5">
+                {team.logo ? (
+                  <img 
+                    src={team.logo} 
+                    alt={`${team.name} Logo`} 
+                    className="w-full h-full object-contain filter group-hover:brightness-105 transition-all duration-300"
+                  />
+                ) : (
+                  <Dribbble size={40} className={`text-on-surface-variant transition-colors duration-300 ${team.color}`} />
+                )}
               </div>
 
               {/* Team Information */}
