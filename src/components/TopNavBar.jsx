@@ -4,6 +4,7 @@ import { Menu, Bell, User, Tv } from 'lucide-react';
 export default function TopNavBar({ activeSection, scrollToSection, setSidebarOpen }) {
   const navItems = [
     { id: 'hero', label: 'LIVE' },
+    { id: 'experience', label: 'EXPERIENCE' },
     { id: 'stats', label: 'STATS' },
     { id: 'players', label: 'ROSTER' },
     { id: 'trophy', label: 'TROPHY' },

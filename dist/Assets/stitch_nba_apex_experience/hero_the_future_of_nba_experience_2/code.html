@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>COURTSIDE ULTRA - The Future of NBA Experience</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,100..900;1,100..900&amp;family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#ffb693",
+                        "on-primary": "#561f00",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#00373e",
+                        "inverse-primary": "#a04100",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-surface-variant": "#e2bfb0",
+                        "inverse-surface": "#e5e2e1",
+                        "outline-variant": "#5a4136",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary-fixed-dim": "#e9c349",
+                        "background": "#131313",
+                        "secondary-fixed": "#ffe088",
+                        "on-tertiary": "#00363d",
+                        "secondary-container": "#af8d11",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#351000",
+                        "on-secondary": "#3c2f00",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed": "#9cf0ff",
+                        "surface": "#131313",
+                        "surface-bright": "#3a3939",
+                        "surface-container-highest": "#353534",
+                        "error": "#ffb4ab",
+                        "tertiary": "#00daf3",
+                        "on-primary-container": "#572000",
+                        "on-secondary-container": "#342800",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "tertiary-container": "#00a8bb",
+                        "surface-tint": "#ffb693",
+                        "on-tertiary-fixed": "#001f24",
+                        "surface-dim": "#131313",
+                        "surface-variant": "#353534",
+                        "on-surface": "#e5e2e1",
+                        "on-error": "#690005",
+                        "outline": "#a98a7d",
+                        "surface-container": "#201f1f",
+                        "tertiary-fixed-dim": "#00daf3",
+                        "on-background": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#004f58",
+                        "primary-container": "#ff6b00",
+                        "primary-fixed": "#ffdbcc",
+                        "inverse-on-surface": "#313030",
+                        "on-secondary-fixed": "#241a00",
+                        "secondary": "#e9c349",
+                        "primary-fixed-dim": "#ffb693"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "container-max": "1440px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Space Grotesk"],
+                        "display-lg-mobile": ["Anybody"],
+                        "headline-xl-mobile": ["Anybody"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-xl": ["Anybody"],
+                        "body-md": ["Hanken Grotesk"],
+                        "display-lg": ["Anybody"],
+                        "label-mono": ["Space Grotesk"],
+                        "headline-md": ["Anybody"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "label-mono": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A; /* Dark Minimalism Base Layer */
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+        
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-button-ghost {
+            border: 1px solid #af8d11; /* Metallic Gold border */
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 100%);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Hero Animation / Atmospheric Effects */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        .hero-basketball {
+            animation: float 8s ease-in-out infinite;
+            filter: drop-shadow(0 0 40px rgba(255, 182, 147, 0.3)); /* Primary glow */
+        }
+
+        .dust-particle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Ambient Lighting */
+        .ambient-glow {
+            position: absolute;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.15) 0%, rgba(0,0,0,0) 70%); /* primary-container */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            filter: blur(60px);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col relative font-body-md text-body-md selection:bg-primary-container selection:text-white">
+<!-- Ambient Background Effects -->
+<div class="fixed inset-0 z-[-2] bg-[url('https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&amp;fit=crop&amp;q=80')] bg-cover bg-center opacity-10" data-alt="A highly atmospheric, cinematic view inside a massive basketball arena right before tip-off. The scene is dominated by deep, matte black shadows and thick theatrical smoke. Brilliant beams of dramatic arena lighting in intense neon orange and metallic gold pierce through the haze from the ceiling, creating dramatic god rays. The mood is elite, intense, and highly anticipated, reflecting a dark luxury sports aesthetic."></div>
+<div class="fixed inset-0 z-[-1] bg-gradient-to-b from-background/40 via-background/80 to-background"></div>
+<div class="ambient-glow"></div>
+<div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none" id="particles"></div>
+<!-- TopNavBar Component -->
+<nav class="bg-surface/10 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(255,182,147,0.1)] fixed top-0 w-full z-50 transition-all duration-300 ease-out active:scale-95">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto md:flex hidden">
+<!-- Brand -->
+<div class="font-display-lg text-headline-md tracking-tighter text-primary bg-clip-text">
+                COURTSIDE ULTRA
+            </div>
+<!-- Navigation Links -->
+<div class="flex items-center gap-gutter font-label-caps text-label-caps">
+<a class="text-primary border-b-2 border-primary pb-1" href="#">LIVE</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-white/5 hover:shadow-[0_0_15px_rgba(255,182,147,0.3)] px-2 py-1 rounded" href="#">ROSTER</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-white/5 hover:shadow-[0_0_15px_rgba(255,182,147,0.3)] px-2 py-1 rounded" href="#">HIGHLIGHTS</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-white/5 hover:shadow-[0_0_15px_rgba(255,182,147,0.3)] px-2 py-1 rounded" href="#">SHOP</a>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<button class="bg-primary-container text-black font-label-caps text-label-caps px-6 py-2 rounded-DEFAULT hover:bg-primary transition-colors">WATCH LIVE</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</div>
+<!-- Mobile Nav Bar (Simplified for responsive) -->
+<div class="flex justify-between items-center px-margin-mobile py-4 md:hidden">
+<div class="font-display-lg-mobile text-headline-md tracking-tighter text-primary">
+                COURTSIDE ULTRA
+            </div>
+<button class="text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<!-- SideNavBar (Hidden on Mobile per rules, visible on Desktop as structural shell if needed, but Hero implies full screen. Keeping it minimal or hidden based on standard layout, but JSON requires it. We will render it but hidden on md down, and on large screens it forms the left rail.) -->
+<!-- Applying Contextual State & Identity: This is a Hero screen, likely "Home". Active is "Home". -->
+<aside class="bg-surface-container-lowest/80 backdrop-blur-2xl border-r border-white/5 shadow-2xl fixed left-0 top-0 h-full w-64 z-40 flex flex-col py-8 px-4 hidden md:flex pt-28">
+<!-- pt-28 to clear top nav -->
+<div class="mb-8 flex flex-col items-center group cursor-pointer group-hover:translate-x-1 duration-200">
+<div class="w-16 h-16 rounded-full glass-panel mb-4 overflow-hidden flex items-center justify-center border border-secondary-container relative">
+<div class="absolute inset-0 bg-gradient-to-tr from-secondary/20 to-transparent"></div>
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A striking portrait of a user profile avatar in a high-end, dramatic lighting setup. The subject is illuminated by intense, cinematic rim lighting in metallic gold and neon orange against a pitch-black background. The mood is elite and professional, matching a dark luxury aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvqVTD_O2zMwn1nqRCPeFo3Vs0HLtPhdGFeXjz8j_U0E7c8KuCN-6lbzymmBEdV_Z9b0noN5SvwLYc9UEe2HshQ6LmueNX14qri8KWm5AJ8_sCVgRyW2FdlCIYHAMd1aoVFbbCe0wdt60YDRhv-39M6mm5LVEOlTTvTSMkeo27J3S-VDFdkZHvvr5u2VhR6ax4vyayYqv1oC0Qz94WInmheMcTNm3Ksgv_paAbsOcOkGEC9FKGLrXQ8phb9jILvO6Ol-Vec_cIopk"/>
+</div>
+<h3 class="font-headline-md text-primary text-center">ELITE MEMBER</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant text-center mt-1">PRO PASS ACTIVE</p>
+</div>
+<nav class="flex-1 space-y-2 font-body-md text-body-md">
+<a class="flex items-center gap-4 px-4 py-3 bg-primary/10 text-primary border-r-4 border-primary group-hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Home
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all group-hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                Stats
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all group-hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">article</span>
+                News
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all group-hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">groups</span>
+                Teams
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all group-hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto space-y-4">
+<button class="w-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps py-3 rounded-DEFAULT hover:bg-secondary transition-colors group-hover:translate-x-1 duration-200">
+                UPGRADE TO MVP
+            </button>
+<div class="space-y-2">
+<a class="flex items-center gap-4 px-4 py-2 text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all group-hover:translate-x-1 duration-200 text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+                    Help
+                </a>
+<a class="flex items-center gap-4 px-4 py-2 text-on-surface-variant hover:bg-white/5 hover:text-primary transition-all group-hover:translate-x-1 duration-200 text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+                    Logout
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas (Adjusted for Side Nav on Desktop) -->
+<main class="flex-1 md:ml-64 flex flex-col justify-center relative min-h-screen pt-24 pb-12">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full h-full flex flex-col justify-center">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center min-h-[716px]">
+<!-- Left Content: Typography & CTAs -->
+<div class="lg:col-span-6 z-10 flex flex-col justify-center space-y-8 order-2 lg:order-1 mt-12 lg:mt-0 relative">
+<!-- Decorative subtle rim light block behind text -->
+<div class="absolute -left-10 top-0 w-1 h-32 bg-gradient-to-b from-primary to-transparent opacity-50 blur-sm"></div>
+<div class="space-y-4">
+<span class="inline-block px-3 py-1 glass-panel rounded-DEFAULT font-label-caps text-label-caps text-secondary border border-secondary-container">
+                            SEASON 2024 NOW LIVE
+                        </span>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface uppercase drop-shadow-2xl">
+                            THE FUTURE OF <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-container">NBA EXPERIENCE</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                            Live scores, stats, highlights, legends, and immersive basketball visuals. Step into the arena with unprecedented clarity and elite analytics.
+                        </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<button class="bg-primary-container text-black font-label-caps text-label-caps px-8 py-4 rounded-DEFAULT hover:bg-primary transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(255,107,0,0.4)]">
+                            WATCH LIVE
+                        </button>
+<button class="glass-button-ghost text-secondary font-label-caps text-label-caps px-8 py-4 rounded-DEFAULT hover:bg-white/10 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+                            EXPLORE TEAMS
+                            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<!-- Micro Data/Stats HUD snippet -->
+<div class="grid grid-cols-3 gap-4 pt-12 border-t border-white/5 w-full max-w-md">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">ACTIVE GAMES</p>
+<p class="font-headline-md text-headline-md text-primary">04</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">TOP SCORER</p>
+<p class="font-headline-md text-headline-md text-secondary">38<span class="text-sm">PTS</span></p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">HIGHLIGHTS</p>
+<p class="font-headline-md text-headline-md text-tertiary">142</p>
+</div>
+</div>
+</div>
+<!-- Right Content: 3D Visual implied -->
+<div class="lg:col-span-6 z-0 flex justify-center items-center order-1 lg:order-2 relative min-h-[400px]">
+<!-- Large 3D rotating basketball image -->
+<div class="relative w-full max-w-[500px] aspect-square hero-basketball">
+<!-- Implied 3D sphere via image -->
+<img alt="3D Basketball" class="w-full h-full object-cover rounded-full shadow-[0_0_80px_rgba(255,107,0,0.2)] border-2 border-primary/20" data-alt="A highly detailed, cinematic 3D render of a professional basketball suspended mid-air against a pure matte black void. The basketball features deep, tactile leather textures. It is dramatically illuminated by a rim light of vibrant neon orange and metallic gold, creating a glowing, premium high-contrast aesthetic typical of dark luxury sports broadcast design. Dust particles catch the light around the ball." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5OXGQxISPImuPPr8XYMJBVzsArLubdRuK8mZ--UvSfGOscHewtV8V5cuLQ2Aeow1A48ZvwMRmkXWefvH3PZIzlTESyEShe2_ahJPCOrPVlDKwnHIMHKmA3JSKMotkGSVvlqb5T88O22T8764hgYowTRi-rcnmR7Wun7Q9K92hTZ5EhFsP176gmjIny9RSvgCxN8jLmnmzxDDsIxHZKP71ISCcAtKBaiJNd8BHff6M7sEey8CycQwEXPxTo_d6YpZhOvnQwpA92_I"/>
+<!-- Floating Glass Stats Cards for depth -->
+<div class="absolute -right-8 top-1/4 glass-panel p-4 rounded-xl shadow-2xl animate-[float_6s_ease-in-out_infinite_reverse]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary" data-weight="fill">local_fire_department</span>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant text-[10px]">CURRENT STREAK</p>
+<p class="font-headline-md text-headline-md text-on-surface leading-none">W4</p>
+</div>
+</div>
+</div>
+<div class="absolute -left-12 bottom-1/4 glass-panel p-4 rounded-xl shadow-2xl animate-[float_7s_ease-in-out_infinite_1s]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center border border-primary/50">
+<span class="material-symbols-outlined text-primary text-sm" data-weight="fill">sports_basketball</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant text-[10px]">LIVE RATING</p>
+<p class="font-headline-md text-headline-md text-primary leading-none">98.5</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Component -->
+<!-- Positioned below main canvas, takes full width but considers side nav on desktop -->
+<footer class="bg-surface-container-lowest w-full py-margin-mobile border-t border-outline-variant flat no shadows md:ml-64 transition-opacity duration-300 relative z-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-gutter max-w-container-max mx-auto">
+<div class="font-display-lg text-headline-md text-on-surface">
+                COURTSIDE ULTRA
+            </div>
+<div class="flex flex-wrap justify-center gap-4 font-label-mono text-label-mono text-outline hover:text-on-surface">
+<a class="hover:underline transition-colors" href="#">Privacy Policy</a>
+<a class="hover:underline transition-colors" href="#">Terms of Service</a>
+<a class="hover:underline transition-colors" href="#">Cookie Settings</a>
+<a class="hover:underline transition-colors" href="#">Support</a>
+</div>
+<div class="font-label-mono text-label-mono text-outline">
+                © 2024 COURTSIDE ULTRA. ALL RIGHTS RESERVED.
+            </div>
+</div>
+</footer>
+<!-- Scripts for micro-interactions -->
+<script>
+        // Simple dust particle generator
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+
+        for (let i = 0; i < particleCount; i++) {
+            createParticle();
+        }
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('dust-particle');
+            
+            // Random properties
+            const size = Math.random() * 3 + 1;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const duration = Math.random() * 10 + 10;
+            const delay = Math.random() * 5;
+            const opacity = Math.random() * 0.4 + 0.1;
+
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${left}vw`;
+            particle.style.top = `${top}vh`;
+            
+            particlesContainer.appendChild(particle);
+
+            // Animate
+            particle.animate([
+                { transform: 'translateY(0) scale(1)', opacity: 0 },
+                { opacity: opacity, offset: 0.2 },
+                { opacity: opacity, offset: 0.8 },
+                { transform: `translateY(-100px) scale(0)`, opacity: 0 }
+            ], {
+                duration: duration * 1000,
+                delay: delay * 1000,
+                iterations: Infinity,
+                easing: 'linear'
+            });
+        }
+    </script>
+</body></html>

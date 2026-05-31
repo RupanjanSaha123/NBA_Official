@@ -4,6 +4,7 @@ import { io } from 'socket.io-client';
 import TopNavBar from './components/TopNavBar';
 import SideNavBar from './components/SideNavBar';
 import HeroSection from './components/HeroSection';
+import ExperienceSection from './components/ExperienceSection';
 import TrophyShowcase from './components/TrophyShowcase';
 import StatsSection from './components/StatsSection';
 import PlayersSection from './components/PlayersSection';
@@ -77,7 +78,7 @@ export default function App() {
 
   // Intersection Observer for scroll tracking
   useEffect(() => {
-    const sections = ['hero', 'stats', 'players', 'trophy', 'legacy', 'highlights', 'teams'];
+    const sections = ['hero', 'experience', 'stats', 'players', 'trophy', 'legacy', 'highlights', 'teams'];
     const observers = [];
 
     const observerCallback = (entries) => {
@@ -175,7 +176,12 @@ export default function App() {
             <HeroSection scrollToSection={scrollToSection} />
           </div>
 
-          {/* Section 2: Scoreboard & Live stats dashboard */}
+          {/* Section 2: Experience overview and immersive features */}
+          <div id="experience" className="scroll-mt-20 border-t border-white/5 bg-black/10">
+            <ExperienceSection />
+          </div>
+
+          {/* Section 3: Scoreboard & Live stats dashboard */}
           <div id="stats" className="scroll-mt-20 border-t border-white/5 bg-black/10">
             <StatsSection socket={socket} />
           </div>

@@ -1,16 +1,10 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { motion, useMotionValue, useSpring, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Flame, Trophy, Play } from 'lucide-react';
 
 export default function HeroSection({ scrollToSection }) {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
-  
-  // State for image source fallback
-  const [ballImgSrc, setBallImgSrc] = useState('/Assets/basketball.png');
-  const [imageError, setImageError] = useState(false);
-  
-  const fallbackBallUrl = "https://lh3.googleusercontent.com/aida-public/AB6AXuD5OXGQxISPImuPPr8XYMJBVzsArLubdRuK8mZ--UvSfGOscHewtV8V5cuLQ2Aeow1A48ZvwMRmkXWefvH3PZIzlTESyEShe2_ahJPCOrPVlDKwnHIMHKmA3JSKMotkGSVvlqb5T88O22T8764hgYowTRi-rcnmR7Wun7Q9K92hTZ5EhFsP176gmjIny9RSvgCxN8jLmnmzxDDsIxHZKP71ISCcAtKBaiJNd8BHff6M7sEey8CycQwEXPxTo_d6YpZhOvnQwpA92_I";
 
   // Mouse positions for 3D tilt
   const x = useMotionValue(0);
@@ -344,21 +338,21 @@ export default function HeroSection({ scrollToSection }) {
                 className="absolute inset-0 z-10 select-none pointer-events-none"
               >
                 {/* The Basketball Centerpiece */}
-                <motion.img 
-                  variants={ballEntranceVariants}
-                  initial="hidden"
-                  animate="visible"
-                  alt="3D Basketball Centerpiece" 
-                  className="w-full h-full object-cover rounded-full shadow-[0_0_80px_rgba(255,107,0,0.25)] border border-primary/20 transition-all duration-300 relative z-10 select-none pointer-events-none"
-                  src={ballImgSrc}
-                  onError={() => {
-                    if (!imageError) {
-                      setImageError(true);
-                      setBallImgSrc(fallbackBallUrl);
-                    }
-                  }}
-                />
-                               {/* Soft reflecting specular light overlay on the ball */}
+              <motion.div
+                variants={ballEntranceVariants}
+                initial="hidden"
+                animate="visible"
+                className="relative w-full h-full rounded-full shadow-[0_0_80px_rgba(255,107,0,0.25)] border border-primary/20 overflow-hidden"
+              >
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-orange-500 via-orange-600 to-[#330a00]" />
+                <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_35%_35%,rgba(255,255,255,0.4),transparent_25%)] mix-blend-screen" />
+                <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_65%_65%,rgba(255,182,147,0.18),transparent_25%)]" />
+                <div className="absolute inset-0 rounded-full pointer-events-none">
+                  <div className="absolute inset-x-16 top-1/3 h-1 rounded-full bg-black/20" />
+                  <div className="absolute inset-y-16 left-1/3 w-1 rounded-full bg-black/20" />
+                  <div className="absolute inset-0 rounded-full border border-white/10" />
+                </div>
+              </motion.div>
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/5 to-transparent mix-blend-overlay z-20 pointer-events-none" />
               </motion.div>
 

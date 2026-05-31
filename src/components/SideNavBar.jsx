@@ -1,9 +1,10 @@
 import React from 'react';
-import { LayoutDashboard, BarChart3, Newspaper, Users, Award, X, HelpCircle, LogOut } from 'lucide-react';
+import { LayoutDashboard, BarChart3, Newspaper, Users, Award, X, HelpCircle, LogOut, Sparkles } from 'lucide-react';
 
 export default function SideNavBar({ sidebarOpen, setSidebarOpen, activeSection, scrollToSection }) {
   const menuItems = [
     { id: 'hero', label: 'Home', icon: LayoutDashboard },
+    { id: 'experience', label: 'Experience', icon: Sparkles },
     { id: 'stats', label: 'Stats', icon: BarChart3 },
     { id: 'players', label: 'Roster', icon: Users },
     { id: 'legacy', label: 'Legacy', icon: Award },
